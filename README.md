@@ -53,6 +53,108 @@ make
 ...
 ```
 
+## 💻 사용 예시
+
+### 1. 정상적인 시뮬레이션 (철학자가 죽지 않는 경우)
+
+```bash
+./philo 5 800 200 200
+```
+
+- 5명의 철학자
+- 800ms 안에 식사하지 못하면 사망
+- 200ms 동안 식사
+- 200ms 동안 수면
+- 누군가 죽을 때까지 계속 실행
+
+**출력 예시:**
+```
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+200 1 is sleeping
+200 3 is sleeping
+400 2 has taken a fork
+400 2 has taken a fork
+400 2 is eating
+...
+```
+
+### 2. 필수 식사 횟수 지정
+
+```bash
+./philo 4 410 200 200 5
+```
+
+- 4명의 철학자가 각각 5번씩 식사하면 프로그램 종료
+- 모든 철학자가 5번 먹으면 자동 종료
+
+**결과:** 모든 철학자가 5번 식사 완료 후 프로그램 정상 종료
+
+### 3. 철학자가 죽는 케이스
+
+```bash
+./philo 4 310 200 100
+```
+
+- 죽는 시간(310ms)이 식사+수면 시간(300ms)보다 짧아 철학자가 사망
+
+**출력 예시:**
+```
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+200 1 is sleeping
+300 1 is thinking
+300 3 has taken a fork
+300 3 has taken a fork
+300 3 is eating
+311 2 died
+```
+
+### 4. 철학자 1명 (특수 케이스)
+
+```bash
+./philo 1 800 200 200
+```
+
+- 포크가 1개뿐이라 식사 불가능
+- 철학자는 800ms 후 사망
+
+**출력 예시:**
+```
+0 1 has taken a fork
+800 1 died
+```
+
+### 5. 많은 철학자
+
+```bash
+./philo 200 800 200 200
+```
+
+- 200명의 철학자도 데드락 없이 정상 동작
+- 모든 철학자가 순서대로 식사
+
+### 6. 잘못된 입력
+
+```bash
+# 인자가 부족한 경우
+./philo 5 800 200
+# Error: 인자 개수가 올바르지 않습니다
+
+# 음수나 0을 입력한 경우
+./philo 0 800 200 200
+# Error: 잘못된 인자입니다
+
+# 숫자가 아닌 값을 입력한 경우
+./philo abc 800 200 200
+# Error: 잘못된 인자입니다
+```
+
 ## 🛠️ 기술 스택
 
 - **언어**: C
